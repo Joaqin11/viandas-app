@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy { // <-- Implementa
   userRoles: string[] = [];
   private subscriptions: Subscription[] = []; // Para manejar las suscripciones y evitar fugas de memoria
 
-  constructor(private authService: AuthService) { } // <-- Inyecta AuthService
+  constructor(public authService: AuthService) { } // <-- Inyecta AuthService
 
   ngOnInit(): void {
     // Suscribirse al username

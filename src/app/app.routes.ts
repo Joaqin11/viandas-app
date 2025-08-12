@@ -18,36 +18,40 @@ export const routes: Routes = [
   //   component: MenuListComponent,
   //   canActivate: [authGuard] // Protege también esta ruta
   // },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },// <-- ¡AÑADE ESTA LÍNEA para proteger la ruta! // <-- Añade la ruta del dashboard
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard], data: { roles: ['Admin', 'User', 'Viewer'] }}, // Todos tienen acceso // <-- ¡AÑADE ESTA LÍNEA para proteger la ruta! // <-- Añade la ruta del dashboard
   { path: 'menus', // <-- Esta es la URL a la que debes navegar
     component: MenuListComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] } // Solo el Admin puede acceder
   },
   {
     path: 'menus/add', // Ruta para agregar un nuevo menú
     component: MenuFormComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] } // Solo el Admin puede acceder
   },
   {
     path: 'menus/edit/:id', // Ruta para editar un menú existente (con ID en la URL)
     component: MenuFormComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] } // Solo el Admin puede acceder
   },
   {
     path: 'menus/upload', // Nueva ruta para subir archivos
     component: MenuUploadComponent,
     canActivate: [authGuard], // Protegida por auth y por rol (admin)
-    //data: { roles: ['Admin'] } // Datos para el roleGuard: solo 'Admin'
+    data: { roles: ['Admin'] } // Datos para el roleGuard: solo 'Admin'
   },
   {
     path: 'select-menu', // Nueva ruta para que los usuarios hagan su selección
     component: UserMenuSelectionComponent,
-    canActivate: [authGuard] // Todos los usuarios autenticados pueden seleccionar
+    canActivate: [authGuard], // Todos los usuarios autenticados pueden seleccionar
+    data: { roles: ['Admin', 'User', 'Viewer'] } // Todos tienen acceso    
   },
   // --- ¡AÑADE ESTA NUEVA RUTA! ---
-  { path: 'user-selections-summary', component: UserSelectionsSummaryComponent, canActivate: [authGuard] }, // Ruta para ver las selecciones de usuario
+  { path: 'user-selections-summary', component: UserSelectionsSummaryComponent, canActivate: [authGuard], data: { roles: ['Admin', 'User', 'Viewer'] }}, // Todos tienen acceso }, // Ruta para ver las selecciones de usuario
   // --- ¡AÑADE ESTA NUEVA RUTA! ---
-  { path: 'reports', component: ReportsComponent, canActivate: [authGuard] }, // Nueva ruta para ver reportes, protegida por authGuard
+  { path: 'reports', component: ReportsComponent, canActivate: [authGuard], data: { roles: ['Admin'] }}, // Datos para el roleGuard: solo 'Admin'  // Nueva ruta para ver reportes, protegida por authGuard
   // --- FIN DE NUEVA RUTA ---
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Cambia esto para redirigir al dashboard por defecto
   { path: '**', redirectTo: '/dashboard' } // Manejo de rutas no encontradas

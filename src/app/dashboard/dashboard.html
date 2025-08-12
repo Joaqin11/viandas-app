@@ -9,9 +9,9 @@
   <div *ngIf="userRoles && userRoles.length > 0">
     <p>Roles: <strong>{{ userRoles.join(', ') }}</strong></p>
   </div>
-  <button routerLink="/menus" class="navigate-to-menus-button">Ir a Gestión de Menús</button>
+  <button *ngIf="authService.getUserRole() === 'Admin'" routerLink="/menus" class="navigate-to-menus-button">Ir a Gestión de Menús</button>
   <button routerLink="/select-menu" class="navigate-to-menus-button">Ir a Selección de Menús</button>
   <button routerLink="/user-selections-summary" class="navigate-to-menus-button">Ver mis Viandas Encargadas</button>
-  <button routerLink="/reports" class="navigate-to-reports-button">Ver Reportes</button>
+  <button *ngIf="authService.getUserRole() === 'Admin'" routerLink="/reports" class="navigate-to-reports-button">Ver Reportes</button>
   <button (click)="logout()">Cerrar Sesión</button>
 </div>
