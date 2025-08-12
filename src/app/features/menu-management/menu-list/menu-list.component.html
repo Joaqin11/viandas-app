@@ -1,0 +1,41 @@
+<div class="menu-list-container">
+  <h2>Menú del Día</h2>
+
+  <div class="date-selector">
+    <label for="menuDate">Seleccionar Fecha:</label>
+    <input type="date" id="menuDate" [(ngModel)]="selectedDate" (change)="loadDailyMenu()">
+    <button (click)="loadDailyMenu()">Cargar Menú</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-message">
+    Cargando menú...
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && dailyMenu">
+    <h3>Menú para el {{ dailyMenu.date | date:'EEEE, d \'de\' MMMM \'de\' yyyy' }}</h3>
+    <p *ngIf="dailyMenu.items.length === 0">No hay ítems en este menú diario.</p>
+
+    <ul class="menu-items-list">
+      <li *ngFor="let item of dailyMenu.items" class="menu-item">
+        <div class="item-details">
+          <h4>{{ item.name }}</h4>
+          <p>Categoría: {{ item.category }}</p>
+        </div>
+        <div class="item-actions">
+          <button class="edit-button" [routerLink]="['/menus/edit', item.id]">Editar</button>
+          <button class="delete-button" [routerLink]="['/menus/delete', item.id]">Eliminar</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!loading && !error && !dailyMenu && selectedDate">
+    <p>No se encontró un menú para la fecha seleccionada ({{ selectedDate | date:'fullDate' }}).</p>
+  </div>
+  <button routerLink="/menus/add" class="add-new-menu-button">Agregar Nuevo Menú (Individual)</button>
+  <button *ngIf="isAdmin" routerLink="/menus/upload" class="upload-menu-button">Cargar Menús desde Archivo</button>
+</div>

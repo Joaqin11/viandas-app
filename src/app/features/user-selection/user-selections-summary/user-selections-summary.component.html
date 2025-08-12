@@ -1,0 +1,46 @@
+<div class="summary-container">
+  <h2>Mis Viandas Encargadas</h2>
+
+  <div class="date-filter-group">
+    <label for="startDate">Fecha de inicio:</label>
+    <input type="date" id="startDate" [(ngModel)]="startDate" (change)="loadUserSelections()">
+    <button (click)="loadUserSelections()" class="load-button">Cargar</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-message">Cargando selecciones...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+  <div *ngIf="selections.length > 0 && !loading" class="selections-list">
+    <ng-container *ngFor="let group of groupSelectionsByDate()">
+      <div class="date-group">
+        <h3>{{ group.date | date:'fullDate' }}</h3>
+        <div *ngFor="let selection of group.items" class="selection-card">
+          <div class="card-header">
+            <h4>{{ selection.selectedMenuItemName }}</h4>
+            <span class="category-tag">{{ selection.selectedCategory }}</span>
+          </div>
+          <div class="card-body">
+            <p *ngIf="selection.observation">
+              <strong>Observación:</strong> {{ selection.observation }}
+            </p>
+            <p><strong>Estado:</strong>
+              <span [ngClass]="{'active-status': selection.isActive, 'inactive-status': !selection.isActive}">
+                {{ selection.isActive ? 'Activa' : 'Cancelada' }}
+              </span>
+            </p>
+          </div>
+          <div class="card-footer" *ngIf="selection.isActive">
+            <button class="cancel-button" (click)="cancelSelection(selection.id)">
+              Cancelar
+            </button>
+          </div>
+          </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="selections.length === 0 && !loading && !errorMessage" class="no-selections-message">
+    <p>No tienes selecciones encargadas a partir de esta fecha.</p>
+  </div>
+</div>

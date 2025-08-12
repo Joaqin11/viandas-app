@@ -1,0 +1,245 @@
+/* src/app/features/user-selection/user-menu-selection/user-menu-selection.component.scss */
+
+/* Estilos para el contenedor principal, si no los tienes */
+.user-selection-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+h2, h3 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Estilos para el grupo de selección de fecha */
+.date-selection-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+
+  label {
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap; // Evita que el texto se rompa
+  }
+
+  input[type="date"] {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    appearance: none; // Elimina estilos nativos del navegador para el date picker
+    -webkit-appearance: none; // Para Safari
+  }
+
+  .load-menu-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+/* Mensajes de estado */
+.loading-message {
+  text-align: center;
+  color: #007bff;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+.error-message {
+  text-align: center;
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.success-message {
+  text-align: center;
+  color: #28a745;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+/* Estilos generales del formulario */
+.selection-form {
+  padding: 20px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  /* Estilo para los select e inputs de texto/número */
+  select,
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  }
+
+  /* ESTILO ESPECÍFICO PARA TEXTAREA */
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px; /* Altura mínima para el textarea */
+    max-height: 200px; /* Altura máxima para el textarea */
+  }
+
+  /* ESTILO ESPECÍFICO PARA EL SELECT DE CATEGORÍA */
+  select#selectedCategory {
+    // Puedes darle estilos similares al select de menú
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background-color: white; /* Fondo blanco para el select */
+    appearance: none; /* Elimina la flecha nativa en algunos navegadores */
+    -webkit-appearance: none; /* Para Safari */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Flecha personalizada */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    cursor: pointer;
+  }
+}
+
+
+/* Estilos para las acciones del formulario (botones) */
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 15px; /* Espacio entre botones */
+  margin-top: 30px; /* Margen superior para separarlo de los inputs */
+
+  button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  .submit-button {
+    background-color: #28a745;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+  }
+
+  .cancel-button {
+    background-color: #6c757d;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: #5a6268;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Mensaje cuando no hay menú disponible */
+.no-menu-available {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 5px;
+  color: #856404;
+  margin-top: 20px;
+}
+
+.selected-menu-summary {
+  background-color: #e9f7ef; // Un verde claro para indicar algo seleccionado
+  border: 1px solid #d4edda;
+  border-left: 5px solid #28a745; // Una barra verde al lado
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 25px; // Espacio debajo del resumen
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #218838; // Un verde más oscuro
+  }
+
+  p {
+    margin: 5px 0;
+    color: #333;
+
+    strong {
+      color: #000;
+    }
+  }
+}
+/* src/app/features/user-selection/user-menu-selection/user-menu-selection.component.scss */
+
+// ... (tus estilos existentes) ...
+
+.validation-message {
+  color: #dc3545; // Rojo para indicar error
+  font-size: 0.85rem;
+  margin-top: 5px;
+}

@@ -1,0 +1,35 @@
+<div class="menu-upload-container">
+  <h2>Cargar Menús desde Archivo</h2>
+
+  <div class="file-input-section">
+    <label for="fileUpload" class="file-label">Seleccionar Archivo de Menús:</label>
+    <input type="file" id="fileUpload" (change)="onFileSelected($event)" accept=".txt,.csv" />
+    <span *ngIf="selectedFileName" class="selected-file-name">{{ selectedFileName }}</span>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
+
+  <div *ngIf="fileContent" class="file-content-preview">
+    <h3>Contenido del Archivo:</h3>
+    <pre>{{ fileContent }}</pre>
+    <p class="preview-note">Por favor, revisa que el formato sea correcto antes de cargar.</p>
+  </div>
+
+  <div class="form-actions">
+    <button
+      type="button"
+      (click)="uploadFile()"
+      [disabled]="!selectedFile"
+      class="upload-button"
+    >
+      Cargar Menús
+    </button>
+    <button type="button" (click)="goBack()" class="cancel-button">Cancelar</button>
+  </div>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="apiErrorMessage" class="api-error-message">
+    {{ apiErrorMessage }}
+  </div>
+</div>

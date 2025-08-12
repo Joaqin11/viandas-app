@@ -1,0 +1,99 @@
+/* Estilos generales para el contenedor del formulario */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 60px); /* Ajusta según el tamaño de tu nav/header/footer */
+  background-color: #f4f7f6; /* Un color de fondo suave */
+  padding: 20px;
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+/* Estilos para el formulario en sí */
+form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Ancho máximo del formulario */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espacio entre los grupos de formulario */
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+}
+
+/* Estilos para cada grupo de input (label + input) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  border-color: #007bff; /* Color al enfocar */
+  outline: none; /* Quita el contorno por defecto del navegador */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Estilos para el botón de submit */
+button[type="submit"] {
+  background-color: #28a745; /* Un verde de éxito */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838; /* Un verde más oscuro al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño efecto al pasar el ratón */
+}
+
+/* Estilos para el texto de "¿No tienes cuenta?" / "¿Ya tienes cuenta?" */
+p {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.95em;
+}
+
+p a {
+  color: #007bff; /* Color azul para enlaces */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
+}

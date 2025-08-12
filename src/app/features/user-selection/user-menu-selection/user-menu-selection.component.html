@@ -1,0 +1,58 @@
+<div class="user-selection-container">
+  <h2>Selección de Menú para el Día</h2>
+
+  <div class="date-selection-group">
+    <label for="selectionDate">Seleccionar Fecha:</label>
+    <input type="date" id="selectionDate" [(ngModel)]="selectedDate" (change)="loadDailyMenu()">
+    <button (click)="loadDailyMenu()" class="load-menu-button">Cargar Menú</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-message">Cargando menú...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+  <ng-container *ngIf="dailyMenu && dailyMenu.items && dailyMenu.items.length > 0">
+    <h3>Menú Disponible para el <span class="math-inline">{{ formatDateForDisplay(dailyMenu.date) }}:</span></h3>
+    <form (ngSubmit)="submitSelection()" class="selection-form">
+      <div class="form-group">
+        <label for="menuOptions">Elige tu opción:</label>
+        <select id="menuOptions" name="selectedMenuId" [(ngModel)]="selectedMenuId" (change)="onMenuSelectionChange()" required>
+          <option [ngValue]="null" disabled>-- Selecciona un menú --</option>
+          <option *ngFor="let item of dailyMenu.items" [ngValue]="item.id">
+            {{ item.name }} ({{ item.category }})
+          </option>
+        </select>
+      </div>
+
+      <div *ngIf="selectedMenuName" class="selected-menu-summary">
+        <h4>Has seleccionado:</h4>
+        <p><strong>Menú:</strong> {{ selectedMenuName }}</p>
+        <p><strong>Categoría:</strong> {{ selectedMenuCategory }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="observation">Observación:</label>
+        <textarea id="observation" name="userObservation" [(ngModel)]="userObservation" rows="3"
+                  placeholder="Ej: Guardar para el viernes..."
+                  [required]="isObservationRequired"
+        ></textarea>
+        <div *ngIf="isObservationRequired && !userObservation.trim()" class="validation-message">
+          La observación es obligatoria para selecciones adicionales del día.
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit"
+                [disabled]="!selectedMenuId || (isObservationRequired && !userObservation.trim())"
+                class="submit-button">Confirmar Selección</button>
+        <button type="button" (click)="goBack()" class="cancel-button">Cancelar</button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="!dailyMenu || !dailyMenu.items || dailyMenu.items.length === 0 && !loading && !errorMessage">
+    <div class="no-menu-available">
+      <p>No hay menú cargado para la fecha seleccionada. Por favor, elige otra fecha o contacta al administrador.</p>
+    </div>
+  </ng-container>
+</div>

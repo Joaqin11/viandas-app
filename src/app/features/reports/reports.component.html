@@ -1,0 +1,120 @@
+<div class="reports-container">
+  <h2>Generar y Ver Reportes</h2>
+
+  <div class="report-controls">
+    <div class="date-range-group">
+      <div class="form-group">
+        <label for="startDate">Fecha de Inicio:</label>
+        <input type="date" id="startDate" [(ngModel)]="startDate" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="endDate">Fecha de Fin:</label>
+        <input type="date" id="endDate" [(ngModel)]="endDate" class="form-control">
+      </div>
+    </div>
+    <div class="button-group">
+      <button class="load-reports-button" (click)="loadReports()" [disabled]="loading">
+        <span *ngIf="!loading">Cargar Reportes</span>
+        <span *ngIf="loading">Cargando...</span>
+      </button>
+      <button class="download-excel-button" (click)="downloadReport('weekly')" [disabled]="!weeklySummaryData.length">
+        Descargar Resumen Semanal
+      </button>
+      <button class="download-excel-button" (click)="downloadReport('total')" [disabled]="!totalQuantitiesData.length">
+        Descargar Cantidades Totales
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-message">
+    Cargando datos...
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!loading && !weeklySummaryData.length && !totalQuantitiesData.length && !errorMessage" class="no-data-message">
+    No hay datos para el rango de fechas seleccionado.
+  </div>
+
+  <div *ngIf="weeklySummaryData.length" class="report-section">
+    <h3>Vista Previa: Resumen Semanal por Usuario</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of weeklySummaryData">
+            <td>{{ row.userName }}</td>
+            <td>
+              <span *ngIf="row.dailySelections['Monday']">
+                {{ row.dailySelections['Monday'].join(' + ') }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="row.dailySelections['Tuesday']">
+                {{ row.dailySelections['Tuesday'].join(' + ') }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="row.dailySelections['Wednesday']">
+                {{ row.dailySelections['Wednesday'].join(' + ') }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="row.dailySelections['Thursday']">
+                {{ row.dailySelections['Thursday'].join(' + ') }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="row.dailySelections['Friday']">
+                {{ row.dailySelections['Friday'].join(' + ') }}
+              </span>
+            </td>
+            <td>{{ row.allObservations }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="totalQuantitiesData.length" class="report-section">
+    <h3>Vista Previa: Cantidades Totales por Menú</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="day-header" *ngFor="let row of totalQuantitiesData" [attr.colspan]="getCategories(row.categories).length">
+              {{ row.day }}
+            </th>
+          </tr>
+          <tr>
+            <ng-container *ngFor="let row of totalQuantitiesData">
+              <th *ngFor="let category of getCategories(row.categories)">
+                {{ category }}
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <ng-container *ngFor="let row of totalQuantitiesData">
+              <td *ngFor="let category of getCategories(row.categories)">
+                {{ row.categories[category] }}
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

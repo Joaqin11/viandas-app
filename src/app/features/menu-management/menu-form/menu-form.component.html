@@ -1,0 +1,32 @@
+<div class="menu-form-container">
+  <h2>{{ isEditMode ? 'Editar Menú' : 'Agregar Nuevo Menú' }}</h2>
+
+  <form (ngSubmit)="saveMenu()" #menuForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nombre del Menú:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="menu.name" required #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+        El nombre es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Categoría:</label>
+      <select id="category" name="category" [(ngModel)]="menu.category" required #category="ngModel">
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+      <div *ngIf="category.invalid && (category.dirty || category.touched)" class="error-message">
+        La categoría es requerida.
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="!menuForm.valid">{{ isEditMode ? 'Guardar Cambios' : 'Crear Menú' }}</button>
+      <button type="button" (click)="goBack()">Cancelar</button>
+    </div>
+  </form>
+
+  <div *ngIf="errorMessage" class="api-error-message">
+    {{ errorMessage }}
+  </div>
+</div>
