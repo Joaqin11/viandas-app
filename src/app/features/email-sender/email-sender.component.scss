@@ -1,0 +1,117 @@
+/* src/app/features/email-sender/email-sender.component.scss */
+
+.email-sender-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #f8f9fa; /* Fondo gris claro similar al contenedor principal */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #343a40; /* Color del texto del encabezado */
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+form {
+  background-color: #fff; /* Fondo del formulario */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6; /* Borde sutil */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #495057; /* Color del texto de la etiqueta */
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da; /* Borde del campo de entrada */
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Asegura que el padding no cambie el ancho */
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #80bdff; /* Borde azul al enfocar */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.is-invalid {
+  border-color: #dc3545; /* Borde rojo para campos inválidos */
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-group label {
+  margin-left: 8px;
+  margin-bottom: 0;
+  font-weight: normal;
+  color: #343a40;
+}
+
+.send-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff; /* Color de fondo del botón principal */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.send-button:disabled {
+  background-color: #a0c4e8; /* Un azul más claro para el estado deshabilitado */
+  cursor: not-allowed;
+}
+
+.success-message {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-message {
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}

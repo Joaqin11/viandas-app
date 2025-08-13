@@ -13,5 +13,6 @@
   <button routerLink="/select-menu" class="navigate-to-menus-button">Ir a Selección de Menús</button>
   <button routerLink="/user-selections-summary" class="navigate-to-menus-button">Ver mis Viandas Encargadas</button>
   <button *ngIf="authService.getUserRole() === 'Admin'" routerLink="/reports" class="navigate-to-reports-button">Ver Reportes</button>
+  <button *ngIf="authService.getUserRole() === 'Admin'" routerLink="/email-sender" class="send-email-button">Enviar Correo</button>
   <button (click)="logout()">Cerrar Sesión</button>
 </div>

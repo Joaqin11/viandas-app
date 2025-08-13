@@ -10,6 +10,7 @@ import { MenuUploadComponent } from './features/menu-management/menu-upload/menu
 import { UserMenuSelectionComponent } from './features/user-selection/user-menu-selection/user-menu-selection.component'; // ¡Importa este!
 import { UserSelectionsSummaryComponent } from './features/user-selection/user-selections-summary/user-selections-summary.component'; // Importa el nuevo componente de resumen de selecciones
 import { ReportsComponent } from './features/reports/reports.component'; // Importa el nuevo componente de reportes
+import { EmailSenderComponent } from './features/email-sender/email-sender.component'; // Importa el nuevo componente de envío de correos
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -52,6 +53,7 @@ export const routes: Routes = [
   { path: 'user-selections-summary', component: UserSelectionsSummaryComponent, canActivate: [authGuard], data: { roles: ['Admin', 'User', 'Viewer'] }}, // Todos tienen acceso }, // Ruta para ver las selecciones de usuario
   // --- ¡AÑADE ESTA NUEVA RUTA! ---
   { path: 'reports', component: ReportsComponent, canActivate: [authGuard], data: { roles: ['Admin'] }}, // Datos para el roleGuard: solo 'Admin'  // Nueva ruta para ver reportes, protegida por authGuard
+  { path: 'email-sender', component: EmailSenderComponent, canActivate: [authGuard], data: { roles: ['Admin'] }},
   // --- FIN DE NUEVA RUTA ---
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Cambia esto para redirigir al dashboard por defecto
   { path: '**', redirectTo: '/dashboard' } // Manejo de rutas no encontradas
